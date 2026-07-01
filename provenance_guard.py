@@ -229,7 +229,7 @@ def home():
 
 
 @app.route("/submit", methods=["POST"])
-@limiter.limit("10 per minute; 100 per day")
+@limiter.limit("30 per minute; 240 per day")
 def submit():
     data = request.get_json()
     text = data.get("text")
@@ -354,12 +354,12 @@ def view_log():
     return jsonify({"entries": read_log()})
 
 if __name__ == "__main__":
-    #app.run(port=5000, debug=True)
-    text_test = "Ultimatly, organizations that remain flexible and commited to ongoing improvement are more likely to achieve meaningful outcomes in an ever-changing global enviroment."
-    with app.test_client() as client:
-        response = client.post("/submit" , json = {
-            "creator_id": "090394",
-            "text" : text_test
+    app.run(port=5000, debug=True)
+    # text_test = "U smelly potatoes"
+    # with app.test_client() as client:
+    #     response = client.post("/submit" , json = {
+    #         "creator_id": "090394",
+    #         "text" : text_test
 
-        })
-        print(response.json)
+    #     })
+    #     print(response.json)
